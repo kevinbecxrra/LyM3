@@ -1,0 +1,68 @@
+ROBOT_R BEGIN Repeat(n,BEGIN Move(5); Assign(var,5)END) END
+ROBOT_R BEGIN if(facing(north),BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,BEGIN Move(5); Assign(var,5)END) END
+ROBOT_R BEGIN if(facing(north),BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,BEGIN if(facing(north),BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,BEGIN Move(5); Assign(var,5)END) END); Move(5) END
+ROBOT_R BEGIN Repeat(10, 
+		BEGIN if(facing(north),
+			BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,
+			BEGIN if(facing(north),
+				BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,
+				BEGIN Move(5); Assign(var,5)END
+				) 
+			END
+		       ); 
+			Move(5) END
+		) ; 
+		while(canMove(south),
+			BEGIN if(facing(north),
+				BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,
+				BEGIN if(facing(north),
+						BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,
+						BEGIN Move(5); Assign(var,5)END
+					)
+				END
+			      ); 
+			      Move(5) 
+			END) 
+                END
+ROBOT_R VARS a2, xd, lol BEGIN Repeat(10, 
+		BEGIN if(facing(north),
+			BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,
+			BEGIN if(facing(north),
+				BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,
+				BEGIN Move(5); Assign(var,5)END
+				) 
+			END
+		       ); 
+			Move(5) END
+		) ; 
+		while(canMove(south),
+			BEGIN if(facing(north),
+				BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,
+				BEGIN if(facing(north),
+						BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END ,
+						BEGIN Move(5); Assign(var,5); while(facing(south), 
+										BEGIN Repeat(10, BEGIN Move(5) END) END
+						)END
+					)
+				END
+			      ); 
+			      Move(5) 
+			END) 
+                END
+
+ROBOT_R BEGIN 
+	 if(canMove(north), 
+	 	BEGIN Repeat(10,
+	 		BEGIN Move(5);Face(north);while(canPick(Balloons, 20), 
+	 			BEGIN if(facing(north),
+	 				BEGIN MoveDir(a,front); MoveDir(2,right); MoveDir(b,left); MoveDir(2,back) END
+	 				,BEGIN Move(5); Assign(var,5) END
+	 			) END
+	 		)END
+	 	); Move(10) END
+	 	,BEGIN Repeat(n,BEGIN Move(5); Assign(var,5)END) END
+	 )END
+ROBOT_R BEGIN if(facing(north), BEGIN Turn(right); if(facing(east), BEGIN Put(Balloons, 1) END, BEGIN Put(Chips,1) END) END, BEGIN Pick(Balloons,1); Turn(left) END) END
+ROBOT_R BEGIN if(canPick(Balloons,5), BEGIN while(canPick(Balloons,1), BEGIN Pick(Balloons,1) END) END, BEGIN Put(Chips,1) END); Turn(right) END
+ROBOT_R BEGIN Put(Balloons, 5); if(canPick(Balloons,5), BEGIN while(canPick(Balloons,1), BEGIN Pick(Balloons,1) END) END, BEGIN Put(Chips,1) END); Turn(right) END
+ROBOT_R BEGIN Put(Balloons, 2); while(canPick(Balloons,1), BEGIN Pick(Balloons,1) END) END	 
